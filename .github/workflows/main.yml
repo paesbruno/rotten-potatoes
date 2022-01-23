@@ -1,5 +1,3 @@
-# This is a basic workflow to help you get started with Actions
-
 name: CI-CD
 
 # Controls when the workflow will run
@@ -24,13 +22,21 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
       - name: Docker Login
-       
         uses: docker/login-action@v1.12.0
         with:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_PWD }}
+      - name: Docker Build and Push
+        uses: docker/build-push-action@v2.7.0
+        with:
+          context: ./src
+          file: ./src/Dockerfile
+          push: true
+          tags: |
+            paesbru/rotten-potatoes:latest
+            paesbru/rotten-potatoes: ${{ github.run_number }}
+        
           
           
          
