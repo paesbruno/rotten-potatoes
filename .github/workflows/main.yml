@@ -35,7 +35,7 @@ jobs:
           push: true
           tags: |
             paesbru/rotten-potatoes:latest
-            paesbru/rotten-potatoes: ${{ github.run_number }}
+            paesbru/rotten-potatoes:${{ github.run_number }}
         
           
           
